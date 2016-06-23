@@ -1,22 +1,5 @@
 # run_analysis.R
-# David Hyatt
 # coursera - Getting and Cleaning Data
-# 23 June 2016
-
-# load all the files
-
-# note: loaded from extracted files each time, not from internet
-# in order to save time
-#
-
-#run_analysis<-function () {
-
-#  features<-read.csv("C:\\Users\\dhyat\\Desktop\\coursera\\UCI HAR Dataset\\features.txt", header=FALSE, sep=" ")
-#features2<-features[,2]
-#
-#  head(features2)
-#  tail(features2)
-#  }
 
 ## Create one R script called run_analysis.R that does the following:
 ## 1. Merges the training and the test sets to create one data set.
@@ -30,7 +13,7 @@ if (!require("data.table")) {
 }
 
 if (!require("reshape2")) {
-  install.packages("reshape2")
+  install.packages("reshape2")  # source of the melt() function
 }
 
 require("data.table")
@@ -49,14 +32,16 @@ features <- read.table(".\\features.txt")[,2]
 # Extract only the measurements on the mean and standard deviation for each measurement.
 extract_features <- grepl("mean|std", features)
 
+# First, processing for the test data
 # Load and process X_test & y_test data.
 X_test <- read.table(".\\test\\X_test.txt")
 y_test <- read.table(".\\test\\y_test.txt")
 subject_test <- read.table(".\\test\\subject_test.txt")
 
+# assign the column names from features
 names(X_test) = features
 
-# Extract only the measurements on the mean and standard deviation for each measurement.
+# Extract only the measurements for mean and standard deviation for each measurement.
 X_test = X_test[,extract_features]
 
 # Load activity labels
@@ -64,15 +49,17 @@ y_test[,2] = activity_labels[y_test[,1]]
 names(y_test) = c("Activity_ID", "Activity_Label")
 names(subject_test) = "subject"
 
-# Bind data
+# Bind test data
 test_data <- cbind(as.data.table(subject_test), y_test, X_test)
 
+# Doing it all over again for the training data
 # Load and process X_train & y_train data.
 X_train <- read.table(".\\train\\X_train.txt")
 y_train <- read.table(".\\train\\y_train.txt")
 
 subject_train <- read.table(".\\train\\subject_train.txt")
 
+# assign the column names from features
 names(X_train) = features
 
 # Extract only the measurements on the mean and standard deviation for each measurement.
@@ -83,8 +70,9 @@ y_train[,2] = activity_labels[y_train[,1]]
 names(y_train) = c("Activity_ID", "Activity_Label")
 names(subject_train) = "subject"
 
-# Bind data
+# Bind training data
 train_data <- cbind(as.data.table(subject_train), y_train, X_train)
+
 
 # Merge test and train data
 data = rbind(test_data, train_data)
