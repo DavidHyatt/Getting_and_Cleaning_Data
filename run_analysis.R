@@ -19,9 +19,9 @@ if (!require("reshape2")) {
 require("data.table")
 require("reshape2")
 
-# set working directory
+# set working directory if not set in environment
 
-setwd("C:\\Users\\dhyat\\Desktop\\coursera\\UCI HAR Dataset")
+#setwd("C:\\Users\\dhyat\\Desktop\\coursera\\UCI HAR Dataset")
 
 # Load: activity labels
 activity_labels <- read.table(".\\activity_labels.txt")[,2]
