@@ -2,7 +2,7 @@
 
 ## Course Project
 
-The R script run_analysis.R does the following.
+You should create one R script called run_analysis.R that does the following.
 
 1. Merges the training and the test sets to create one data set.
 2. Extracts only the measurements on the mean and standard deviation for each measurement.
@@ -10,13 +10,13 @@ The R script run_analysis.R does the following.
 4. Appropriately labels the data set with descriptive activity names.
 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-## Steps to use
+## Steps to work on this course project
 
 1. Download the data source and put into a folder on your local drive. You'll have a ```UCI HAR Dataset``` folder.
 2. Put ```run_analysis.R``` in the parent folder of ```UCI HAR Dataset```
-3. Working directory is set inside run_analysis.R -- modify the setwd function inside run_analysis.R as required
+3. Set working directory in environment, or remove comment from the setwd() function in run_analysis.R and set there
 4. Run ```source("run_analysis.R")```, then it will generate a new file ```tiny_data.txt``` in your working directory.
 
 ## Dependencies
 
-```run_analysis.R``` file will install the dependencies automatically. It depends on ```reshape2``` and ```data.table```. 
+```run_analysis.R``` file will help you to install the dependencies automatically. It depends on ```reshape2``` and ```data.table```. 
